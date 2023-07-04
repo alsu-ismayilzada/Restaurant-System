@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class ItemManagement implements ItemService {
+public class ItemManager implements ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 

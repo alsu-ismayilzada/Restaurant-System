@@ -1,7 +1,6 @@
 package com.example.restaurantsystem.management;
 
 import com.example.restaurantsystem.dto.ReservationDto;
-import com.example.restaurantsystem.entity.Reservation;
 import com.example.restaurantsystem.mapper.ReservationMapper;
 import com.example.restaurantsystem.repository.ReservationRepository;
 import com.example.restaurantsystem.service.ReservationService;
@@ -12,7 +11,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class ReservationManagement implements ReservationService {
+public class ReservationManager implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
@@ -23,7 +22,7 @@ public class ReservationManagement implements ReservationService {
     }
 
     @Override
-    public void rejectById(Integer id) {
+    public void deleteById(Integer id) {
         reservationRepository.deleteById(id);
     }
 

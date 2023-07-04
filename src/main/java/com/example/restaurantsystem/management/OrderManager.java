@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class OrderManagement implements OrderService {
+public class OrderManager implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
 
@@ -21,7 +21,7 @@ public class OrderManagement implements OrderService {
     }
 
     @Override
-    public void rejectById(Integer id) {
+    public void deleteById(Integer id) {
         orderRepository.deleteById(id);
     }
 
