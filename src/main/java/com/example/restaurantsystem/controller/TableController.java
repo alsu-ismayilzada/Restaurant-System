@@ -27,7 +27,7 @@ public class TableController {
     public TableDto getById(@PathVariable Integer id){
         return tableManager.getById(id);
     }
-    public List<TableDto> getAll(){
-        return tableManager.getAll();
+    public List<TableDto> getAll(@RequestParam(value = "page") int page,@RequestParam(value = "count") int count){
+        return tableManager.getAll(page,count);
     }
 }

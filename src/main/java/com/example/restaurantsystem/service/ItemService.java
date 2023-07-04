@@ -11,6 +11,6 @@ public interface ItemService {
     void addItem(ItemDto item);
     void deleteById(Integer id);
     ItemDto getById(Integer id);
-    List<ItemDto> getAll();
+    List<ItemDto> getAll(int page,int count);
 
 }

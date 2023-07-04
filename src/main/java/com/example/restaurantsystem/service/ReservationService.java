@@ -9,5 +9,5 @@ public interface ReservationService {
     void addReservation(ReservationDto reservation);
     void deleteById(Integer id);
     ReservationDto getById(Integer id);
-    List<ReservationDto> getAll();
+    List<ReservationDto> getAll(int page, int count);
 }

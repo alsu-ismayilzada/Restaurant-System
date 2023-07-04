@@ -1,10 +1,14 @@
 package com.example.restaurantsystem.management;
 
 import com.example.restaurantsystem.dto.TableDto;
+import com.example.restaurantsystem.entity.Table;
+import com.example.restaurantsystem.entity.User;
 import com.example.restaurantsystem.mapper.TableMapper;
 import com.example.restaurantsystem.repository.TableRepository;
 import com.example.restaurantsystem.service.TableService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -34,8 +38,10 @@ public class TableManager implements TableService {
     }
 
     @Override
-    public List<TableDto> getAll() {
-        return tableRepository.findAll()
+    public List<TableDto> getAll(int page,int count) {
+        Page<Table> all = tableRepository.findAll(PageRequest.of(page,count));
+
+        return all.getContent()
                 .stream().map(tableMapper::toTableDto)
                 .toList();
     }

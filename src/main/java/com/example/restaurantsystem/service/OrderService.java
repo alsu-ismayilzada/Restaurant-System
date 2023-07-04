@@ -9,5 +9,5 @@ public interface OrderService {
     void addOrder(OrderDto order);
     void deleteById(Integer id);
     OrderDto getById(Integer id);
-    List<OrderDto> getAll();
+    List<OrderDto> getAll(int page, int count);
 }

@@ -26,7 +26,7 @@ public class ItemController {
     public ItemDto getById(@PathVariable Integer id){
         return itemManager.getById(id);
     }
-    public List<ItemDto> getAll(){
-        return itemManager.getAll();
+    public List<ItemDto> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
+        return itemManager.getAll(page,count);
     }
 }

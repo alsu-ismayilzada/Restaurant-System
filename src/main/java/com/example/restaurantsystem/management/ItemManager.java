@@ -1,10 +1,13 @@
 package com.example.restaurantsystem.management;
 
 import com.example.restaurantsystem.dto.ItemDto;
+import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.mapper.ItemMapper;
 import com.example.restaurantsystem.repository.ItemRepository;
 import com.example.restaurantsystem.service.ItemService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,8 +36,10 @@ public class ItemManager implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getAll() {
-        return itemRepository.findAll()
+    public List<ItemDto> getAll(int page, int count) {
+        Page<Item> all = itemRepository.findAll(PageRequest.of(page,count));
+
+        return all.getContent()
                 .stream().map(itemMapper::toItemDto)
                 .toList();
     }

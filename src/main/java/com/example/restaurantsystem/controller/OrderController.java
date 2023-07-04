@@ -28,7 +28,7 @@ public class OrderController {
         return orderManager.getById(id);
     }
     @GetMapping()
-    public List<OrderDto> getAll(){
-        return orderManager.getAll();
+    public List<OrderDto> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
+        return orderManager.getAll(page,count);
     }
 }
