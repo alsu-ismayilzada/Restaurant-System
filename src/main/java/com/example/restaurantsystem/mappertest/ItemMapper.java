@@ -1,9 +1,8 @@
-package com.example.restaurantsystem.mapper;
+package com.example.restaurantsystem.mappertest;
 
 import com.example.restaurantsystem.dto.ItemDto;
 import com.example.restaurantsystem.entity.Item;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
 
 @Mapper(componentModel = "spring")

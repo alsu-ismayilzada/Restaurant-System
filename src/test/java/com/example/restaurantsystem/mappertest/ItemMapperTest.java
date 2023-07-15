@@ -1,12 +1,10 @@
-package com.example.restaurantsystem.mapper;
+package com.example.restaurantsystem.mappertest;
 
 import com.example.restaurantsystem.dto.ItemDto;
 import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.entity.repository.ItemType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ItemMapperTest {
 

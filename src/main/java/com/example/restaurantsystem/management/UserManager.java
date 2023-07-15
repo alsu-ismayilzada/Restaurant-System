@@ -2,7 +2,7 @@ package com.example.restaurantsystem.management;
 
 import com.example.restaurantsystem.dto.UserDto;
 import com.example.restaurantsystem.entity.User;
-import com.example.restaurantsystem.mapper.UserMapper;
+import com.example.restaurantsystem.mappertest.UserMapper;
 import com.example.restaurantsystem.repository.UserRepository;
 import com.example.restaurantsystem.service.UserService;
 import lombok.AllArgsConstructor;

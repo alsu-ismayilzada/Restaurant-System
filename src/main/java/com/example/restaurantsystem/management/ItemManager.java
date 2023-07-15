@@ -1,7 +1,7 @@
 package com.example.restaurantsystem.management;
 import com.example.restaurantsystem.dto.ItemDto;
 import com.example.restaurantsystem.entity.Item;
-import com.example.restaurantsystem.mapper.ItemMapper;
+import com.example.restaurantsystem.mappertest.ItemMapper;
 import com.example.restaurantsystem.repository.ItemRepository;
 import com.example.restaurantsystem.service.ItemService;
 import lombok.AllArgsConstructor;
