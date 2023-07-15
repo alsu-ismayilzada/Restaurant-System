@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 public record ReservationDto(
+
         User user,
         LocalDateTime date,
         Table table,

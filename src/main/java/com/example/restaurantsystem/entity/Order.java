@@ -19,10 +19,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @ManyToOne
-    @JoinColumn(name="menu_id")
+    @JoinColumn(name="menu_id",referencedColumnName = "id")
     Item item;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     User user;
     LocalDateTime date;
     Double bill;

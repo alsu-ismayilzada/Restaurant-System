@@ -20,11 +20,11 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     User user;
     LocalDateTime date;
     @ManyToOne
-    @JoinColumn(name="table_id")
+    @JoinColumn(name="table_id",referencedColumnName = "id")
     Table table;
     Double price;
 }

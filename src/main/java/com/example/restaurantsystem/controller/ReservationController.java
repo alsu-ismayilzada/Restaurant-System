@@ -1,9 +1,7 @@
 package com.example.restaurantsystem.controller;
-
 import com.example.restaurantsystem.dto.ReservationDto;
 import com.example.restaurantsystem.management.ReservationManager;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,6 +17,7 @@ public class ReservationController {
         reservationManager.addReservation(reservation);
     }
 
+    @DeleteMapping("{id}")
     public void deleteById(@PathVariable Integer id){
         reservationManager.deleteById(id);
     }

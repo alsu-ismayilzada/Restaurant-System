@@ -3,6 +3,8 @@ package com.example.restaurantsystem.mapper;
 import com.example.restaurantsystem.dto.ItemDto;
 import com.example.restaurantsystem.entity.Item;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
