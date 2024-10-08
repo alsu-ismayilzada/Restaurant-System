@@ -1,8 +1,7 @@
 package com.example.restaurantsystem.controller;
 
 import com.example.restaurantsystem.dto.TableDto;
-import com.example.restaurantsystem.entity.Table;
-import com.example.restaurantsystem.management.TableManager;
+import com.example.restaurantsystem.service.impl.TableManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

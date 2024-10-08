@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.controller;
 import com.example.restaurantsystem.dto.ReservationDto;
-import com.example.restaurantsystem.management.ReservationManager;
+import com.example.restaurantsystem.service.impl.ReservationManager;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

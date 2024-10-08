@@ -1,7 +1,7 @@
 package com.example.restaurantsystem.controller;
 
 import com.example.restaurantsystem.dto.UserDto;
-import com.example.restaurantsystem.management.UserManager;
+import com.example.restaurantsystem.service.impl.UserManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

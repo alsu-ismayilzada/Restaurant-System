@@ -1,4 +1,4 @@
-package com.example.restaurantsystem.mappertest;
+package com.example.restaurantsystem.mapper;
 
 import com.example.restaurantsystem.dto.ReservationDto;
 import com.example.restaurantsystem.entity.Reservation;

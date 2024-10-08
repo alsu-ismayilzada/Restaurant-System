@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ItemService {
 
-
     void addItem(ItemDto item);
     void deleteById(Integer id);
     ItemDto getById(Integer id);

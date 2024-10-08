@@ -1,8 +1,8 @@
-package com.example.restaurantsystem.management;
+package com.example.restaurantsystem.service.impl;
 
 import com.example.restaurantsystem.dto.ReservationDto;
 import com.example.restaurantsystem.entity.Reservation;
-import com.example.restaurantsystem.mappertest.ReservationMapper;
+import com.example.restaurantsystem.mapper.ReservationMapper;
 import com.example.restaurantsystem.repository.ReservationRepository;
 import com.example.restaurantsystem.service.ReservationService;
 import lombok.AllArgsConstructor;
