@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition
-public class SpringDecumentation {
+public class SwaggerConfiguration {
     @Bean
     public OpenAPI openAPI(){
         return new OpenAPI().info(

@@ -1,4 +1,4 @@
-package com.example.restaurantsystem.groovy.service
+package com.example.restaurantsystem.junit.service
 
 import com.example.restaurantsystem.dto.OrderDto
 import com.example.restaurantsystem.entity.Order

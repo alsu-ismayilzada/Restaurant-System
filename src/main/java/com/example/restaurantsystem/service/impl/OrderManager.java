@@ -5,16 +5,14 @@ import com.example.restaurantsystem.entity.Order;
 import com.example.restaurantsystem.mapper.OrderMapper;
 import com.example.restaurantsystem.repository.OrderRepository;
 import com.example.restaurantsystem.service.OrderService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-//@AllArgsConstructor
+@Service
 @RequiredArgsConstructor
 public class OrderManager implements OrderService {
     private final OrderRepository orderRepository;
