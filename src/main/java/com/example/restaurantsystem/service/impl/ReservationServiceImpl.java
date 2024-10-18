@@ -8,7 +8,9 @@ import com.example.restaurantsystem.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -31,9 +33,7 @@ public class ReservationServiceImpl implements com.example.restaurantsystem.serv
 
     @Override
     public ReservationResponse getById(Integer id) {
-        return reservationRepository.findById(id)
-                .stream().map(reservationMapper::toReservationDto)
-                .findFirst().get();
+        return reservationMapper.toReservationDto(findById(id));
     }
 
     @Override
@@ -43,5 +43,17 @@ public class ReservationServiceImpl implements com.example.restaurantsystem.serv
         return all.getContent()
                 .stream().map(reservationMapper::toReservationDto)
                 .toList();
+    }
+
+    @Override
+    public ReservationResponse updateById(Integer id, ReservationRequest request) {
+        var reservation = findById(id);
+        reservationMapper.updateReservation(reservation, request);
+        return reservationMapper.toReservationDto(reservation);
+    }
+
+    public Reservation findById(Integer id) {
+        return reservationRepository.findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Reservation not found"));
     }
 }

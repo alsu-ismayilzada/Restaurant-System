@@ -1,5 +1,5 @@
 package com.example.restaurantsystem.entity;
-import com.example.repository.ItemType;
+import com.example.restaurantsystem.repository.ItemType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,12 +13,14 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String name;
     String photo;
     Double price;
+
     @Enumerated(EnumType.STRING)
     ItemType itemType;
 }

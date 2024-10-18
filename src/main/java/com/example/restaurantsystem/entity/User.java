@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.entity;
 
-import com.example.repository.Role;
+import com.example.restaurantsystem.repository.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
@@ -21,7 +22,8 @@ public class User {
     String address;
     String password;
     Integer contact;
-    @Enumerated(EnumType.STRING )
+
+    @Enumerated(EnumType.STRING)
     Role role;
 
 

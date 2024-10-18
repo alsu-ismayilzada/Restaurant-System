@@ -8,7 +8,9 @@ import com.example.restaurantsystem.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -30,9 +32,7 @@ public class OrderServiceImpl implements com.example.restaurantsystem.service.Or
 
     @Override
     public OrderResponse getById(Integer id) {
-        return orderRepository.findById(id)
-                .stream().map(orderMapper::toOrderDto)
-                .findFirst().get();
+        return orderMapper.toOrderDto(findById(id));
     }
 
     @Override
@@ -42,5 +42,17 @@ public class OrderServiceImpl implements com.example.restaurantsystem.service.Or
         return all.getContent()
                 .stream().map(orderMapper::toOrderDto)
                 .toList();
+    }
+
+    @Override
+    public OrderResponse updateById(Integer id, OrderRequest request) {
+        var order = findById(id);
+        orderMapper.updateOrder(order, request);
+        return orderMapper.toOrderDto(order);
+    }
+
+    public Order findById(Integer id){
+        return orderRepository.findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Order not found"));
     }
 }

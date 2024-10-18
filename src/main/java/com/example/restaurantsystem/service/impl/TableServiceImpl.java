@@ -9,7 +9,9 @@ import com.example.restaurantsystem.service.TableService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,9 +34,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public TableResponse getById(Integer id) {
-        return tableRepository.findById(id)
-                .stream().map(tableMapper::toTableDto)
-                .findFirst().get();
+        return tableMapper.toTableDto(findById(id));
     }
 
     @Override
@@ -44,5 +44,19 @@ public class TableServiceImpl implements TableService {
         return all.getContent()
                 .stream().map(tableMapper::toTableDto)
                 .toList();
+    }
+
+    @Override
+    public TableResponse updateById(Integer id, TableRequest request) {
+        var table = findById(id);
+        tableMapper.updateTable(table, request);
+        return tableMapper.toTableDto(table);
+    }
+
+    public Table findById(Integer id) {
+        return tableRepository.findById(id)
+                .orElseThrow(() ->{
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Not Found");
+                });
     }
 }

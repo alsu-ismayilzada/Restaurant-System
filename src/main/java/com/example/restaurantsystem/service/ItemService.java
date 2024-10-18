@@ -11,5 +11,6 @@ public interface ItemService {
     void deleteById(Integer id);
     ItemResponse getById(Integer id);
     List<ItemResponse> getAll(int page, int count);
+    ItemResponse updateById(Integer id, ItemRequest item);
 
 }

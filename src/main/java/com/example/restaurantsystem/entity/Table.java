@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.entity;
 
-import com.example.repository.TableStatus;
+import com.example.restaurantsystem.repository.TableStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,10 +14,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Table {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     Integer capacity;
+
     @Enumerated(EnumType.STRING)
     TableStatus status;
 }

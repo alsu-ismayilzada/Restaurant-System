@@ -3,33 +3,40 @@ package com.example.restaurantsystem.controller;
 import com.example.restaurantsystem.dto.response.OrderResponse;
 import com.example.restaurantsystem.dto.request.OrderRequest;
 import com.example.restaurantsystem.service.impl.OrderServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
+@RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderServiceImpl orderManager;
+    private final OrderServiceImpl orderService;
 
-    public OrderController(OrderServiceImpl orderManager) {
-        this.orderManager = orderManager;
-    }
     @PostMapping()
     public void addOrder(@RequestBody OrderRequest order){
-        orderManager.addOrder(order);
+        orderService.addOrder(order);
     }
+
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Integer id){
-        orderManager.deleteById(id);
+        orderService.deleteById(id);
     }
+
     @GetMapping("{id}")
     public OrderResponse getById(@PathVariable Integer id){
-        return orderManager.getById(id);
+        return orderService.getById(id);
     }
+
     @GetMapping()
     public List<OrderResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
-        return orderManager.getAll(page,count);
+        return orderService.getAll(page,count);
+    }
+
+    @PutMapping("/{orderId}")
+    public OrderResponse updateOrder(@PathVariable Integer orderId, @RequestBody OrderRequest order){
+        return orderService.updateById(orderId, order);
     }
 }

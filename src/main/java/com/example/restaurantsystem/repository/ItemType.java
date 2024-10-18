@@ -1,4 +1,4 @@
-package com.example.repository;
+package com.example.restaurantsystem.repository;
 
 public enum ItemType {
     BREAKFAST("Breakfast"),

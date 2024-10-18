@@ -11,4 +11,5 @@ public interface OrderService {
     void deleteById(Integer id);
     OrderResponse getById(Integer id);
     List<OrderResponse> getAll(int page, int count);
+    OrderResponse updateById(Integer id, OrderRequest order);
 }

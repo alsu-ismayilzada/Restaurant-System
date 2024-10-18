@@ -7,7 +7,10 @@ import com.example.restaurantsystem.repository.ItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -27,9 +30,7 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
     }
     @Override
     public ItemResponse getById(Integer id) {
-        return itemRepository.findById(id)
-                .stream().map(itemMapper::toItemDto)
-                .findFirst().get();
+        return itemMapper.toItemDto(findById(id));
     }
     @Override
     public List<ItemResponse> getAll(int page, int count) {
@@ -37,5 +38,17 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
         return all.getContent()
                 .stream().map(itemMapper::toItemDto)
                 .toList();
+    }
+
+    @Override
+    public ItemResponse updateById(Integer id, ItemRequest request) {
+        var item = findById(id);
+        itemMapper.updateItem(item, request);
+        return itemMapper.toItemDto(item);
+    }
+
+    public Item findById(Integer id){
+        return itemRepository.findById(id).
+                orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item Not Found"));
     }
 }

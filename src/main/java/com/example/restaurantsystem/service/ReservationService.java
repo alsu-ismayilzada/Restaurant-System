@@ -11,4 +11,5 @@ public interface ReservationService {
     void deleteById(Integer id);
     ReservationResponse getById(Integer id);
     List<ReservationResponse> getAll(int page, int count);
+    ReservationResponse updateById(Integer id, ReservationRequest reservation);
 }

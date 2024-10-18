@@ -12,4 +12,5 @@ public interface UserService {
     void deleteById(Integer id);
     UserResponse getById(Integer id);
     List<UserResponse> getAll(int page, int count);
+    UserResponse updateUserById(Integer id, UserRequest user);
 }

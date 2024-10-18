@@ -9,7 +9,9 @@ import com.example.restaurantsystem.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -32,9 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getById(Integer id) {
-        return userRepository.findById(id)
-                .stream().map(userMapper::toUserDto)
-                .findFirst().get();
+        return userMapper.toUserDto(findById(id));
     }
 
     @Override
@@ -43,5 +43,17 @@ public class UserServiceImpl implements UserService {
         return all.getContent()
                 .stream().map(userMapper::toUserDto)
                 .toList();
+    }
+
+    @Override
+    public UserResponse updateUserById(Integer id, UserRequest request) {
+        var user = findById(id);
+        userMapper.updateUser(user,request);
+        return userMapper.toUserDto(user);
+    }
+
+    public User findById(Integer id){
+        return userRepository.findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User Not Found"));
     }
 }

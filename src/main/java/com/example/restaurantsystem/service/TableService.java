@@ -11,4 +11,5 @@ public interface TableService {
     void deleteById(Integer id);
     TableResponse getById(Integer id);
     List<TableResponse> getAll(int page , int count);
+    TableResponse updateById(Integer id, TableRequest table);
 }

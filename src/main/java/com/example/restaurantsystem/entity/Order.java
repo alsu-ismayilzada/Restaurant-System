@@ -15,12 +15,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+
     @ManyToOne
     @JoinColumn(name="menu_id",referencedColumnName = "id")
     Item item;
+
     @ManyToOne
     @JoinColumn(name="user_id",referencedColumnName = "id")
     User user;
