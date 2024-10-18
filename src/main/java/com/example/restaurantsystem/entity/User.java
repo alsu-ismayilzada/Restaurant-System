@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.entity;
 
-import com.example.restaurantsystem.entity.repository.Role;
+import com.example.repository.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

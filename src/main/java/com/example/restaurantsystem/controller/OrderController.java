@@ -1,7 +1,7 @@
 package com.example.restaurantsystem.controller;
 
 import com.example.restaurantsystem.dto.OrderDto;
-import com.example.restaurantsystem.service.impl.OrderManager;
+import com.example.restaurantsystem.service.impl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/order")
 public class OrderController {
 
-    private final OrderManager orderManager;
+    private final OrderServiceImpl orderManager;
 
-    public OrderController(OrderManager orderManager) {
+    public OrderController(OrderServiceImpl orderManager) {
         this.orderManager = orderManager;
     }
     @PostMapping()

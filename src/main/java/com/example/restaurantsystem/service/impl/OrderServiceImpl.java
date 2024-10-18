@@ -4,7 +4,6 @@ import com.example.restaurantsystem.dto.OrderDto;
 import com.example.restaurantsystem.entity.Order;
 import com.example.restaurantsystem.mapper.OrderMapper;
 import com.example.restaurantsystem.repository.OrderRepository;
-import com.example.restaurantsystem.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderManager implements OrderService {
+public class OrderServiceImpl implements com.example.restaurantsystem.service.OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
 

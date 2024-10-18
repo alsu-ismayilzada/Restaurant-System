@@ -4,8 +4,7 @@ import com.example.restaurantsystem.dto.OrderDto
 import com.example.restaurantsystem.entity.Order
 import com.example.restaurantsystem.mapper.OrderMapper
 import com.example.restaurantsystem.repository.OrderRepository
-import com.example.restaurantsystem.service.OrderService
-import com.example.restaurantsystem.service.impl.OrderManager
+import com.example.restaurantsystem.service.impl.OrderServiceImpl
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
@@ -15,12 +14,12 @@ class OrderServiceTest extends  Specification{
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private OrderRepository orderRepository
     private OrderMapper orderMapper
-    private OrderService orderService
+    private OrderServiceImpl orderService
 
     def setup() {
         orderRepository = Mock()
         orderMapper = Mock()
-        orderService = new OrderManager(orderRepository,orderMapper)
+        orderService = new OrderServiceImpl(orderRepository,orderMapper)
     }
 
     def "TestGetById success" () {

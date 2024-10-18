@@ -1,7 +1,7 @@
 package com.example.restaurantsystem.controller;
 
 import com.example.restaurantsystem.dto.ItemDto;
-import com.example.restaurantsystem.service.impl.ItemManager;
+import com.example.restaurantsystem.service.impl.ItemServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/item")
 public class ItemController {
-    private final ItemManager itemManager;
+    private final ItemServiceImpl itemManager;
 
-    public ItemController(ItemManager itemManager) {
+    public ItemController(ItemServiceImpl itemManager) {
         this.itemManager = itemManager;
     }
     @PostMapping

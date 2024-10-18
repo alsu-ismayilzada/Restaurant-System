@@ -1,8 +1,6 @@
 package com.example.restaurantsystem.dto;
 
-import com.example.restaurantsystem.entity.repository.ItemType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.example.repository.ItemType;
 import lombok.Data;
 
 @Data

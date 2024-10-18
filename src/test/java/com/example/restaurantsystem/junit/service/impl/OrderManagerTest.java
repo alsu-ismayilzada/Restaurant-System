@@ -1,4 +1,4 @@
-package com.example.restaurantsystem.service.impl;
+package com.example.restaurantsystem.junit.service.impl;
 
 import com.example.restaurantsystem.entity.Order;
 import com.example.restaurantsystem.repository.OrderRepository;
@@ -13,8 +13,8 @@ class OrderManagerTest {
     @MockBean
     private OrderRepository orderRepository;
 
-    @Autowired
-    private OrderManager orderManager;
+//    @Autowired
+//    private OrderManager orderManager;
 
     @Test
     void addOrder() {

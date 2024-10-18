@@ -1,4 +1,5 @@
-package com.example.restaurantsystem.entity.repository;
+package com.example.repository;
+
 
 public enum Role {
 

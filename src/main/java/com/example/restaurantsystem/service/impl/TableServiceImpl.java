@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class TableManager implements TableService {
+public class TableServiceImpl implements TableService {
 
     private final TableRepository tableRepository;
     private final TableMapper tableMapper;

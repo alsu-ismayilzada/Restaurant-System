@@ -1,15 +1,15 @@
 package com.example.restaurantsystem.controller;
 import com.example.restaurantsystem.dto.ReservationDto;
-import com.example.restaurantsystem.service.impl.ReservationManager;
+import com.example.restaurantsystem.service.impl.ReservationServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/reserv")
 public class ReservationController {
-    private final ReservationManager reservationManager;
+    private final ReservationServiceImpl reservationManager;
 
-    public ReservationController(@RequestBody ReservationManager reservationManager) {
+    public ReservationController(@RequestBody ReservationServiceImpl reservationManager) {
         this.reservationManager = reservationManager;
     }
     @PostMapping("")

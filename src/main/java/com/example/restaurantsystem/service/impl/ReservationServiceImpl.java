@@ -4,7 +4,6 @@ import com.example.restaurantsystem.dto.ReservationDto;
 import com.example.restaurantsystem.entity.Reservation;
 import com.example.restaurantsystem.mapper.ReservationMapper;
 import com.example.restaurantsystem.repository.ReservationRepository;
-import com.example.restaurantsystem.service.ReservationService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class ReservationManager implements ReservationService {
+public class ReservationServiceImpl implements com.example.restaurantsystem.service.ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;

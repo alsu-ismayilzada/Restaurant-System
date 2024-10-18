@@ -3,7 +3,6 @@ import com.example.restaurantsystem.dto.ItemDto;
 import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.mapper.ItemMapper;
 import com.example.restaurantsystem.repository.ItemRepository;
-import com.example.restaurantsystem.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ItemManager implements ItemService {
+public class ItemServiceImpl implements com.example.restaurantsystem.service.ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 

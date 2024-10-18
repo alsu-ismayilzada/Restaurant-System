@@ -1,7 +1,7 @@
 package com.example.restaurantsystem.controller;
 
 import com.example.restaurantsystem.dto.UserDto;
-import com.example.restaurantsystem.service.impl.UserManager;
+import com.example.restaurantsystem.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/user")
 @Slf4j
 public class UserController {
-    private final UserManager userManager;
+    private final UserServiceImpl userManager;
 
-    public UserController(UserManager userManager) {
+    public UserController(UserServiceImpl userManager) {
         this.userManager = userManager;
     }
     @PostMapping()
