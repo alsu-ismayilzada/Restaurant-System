@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.controller;
 
-import com.example.restaurantsystem.dto.OrderDto;
+import com.example.restaurantsystem.dto.response.OrderResponse;
+import com.example.restaurantsystem.dto.request.OrderRequest;
 import com.example.restaurantsystem.service.impl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class OrderController {
         this.orderManager = orderManager;
     }
     @PostMapping()
-    public void addOrder(@RequestBody OrderDto order){
+    public void addOrder(@RequestBody OrderRequest order){
         orderManager.addOrder(order);
     }
     @DeleteMapping("{id}")
@@ -24,11 +25,11 @@ public class OrderController {
         orderManager.deleteById(id);
     }
     @GetMapping("{id}")
-    public OrderDto getById(@PathVariable Integer id){
+    public OrderResponse getById(@PathVariable Integer id){
         return orderManager.getById(id);
     }
     @GetMapping()
-    public List<OrderDto> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
+    public List<OrderResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
         return orderManager.getAll(page,count);
     }
 }

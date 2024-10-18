@@ -1,13 +1,14 @@
 package com.example.restaurantsystem.service;
 
-import com.example.restaurantsystem.dto.OrderDto;
+import com.example.restaurantsystem.dto.response.OrderResponse;
+import com.example.restaurantsystem.dto.request.OrderRequest;
 
 import java.util.List;
 
 public interface OrderService {
 
-    void addOrder(OrderDto order);
+    void addOrder(OrderRequest order);
     void deleteById(Integer id);
-    OrderDto getById(Integer id);
-    List<OrderDto> getAll(int page, int count);
+    OrderResponse getById(Integer id);
+    List<OrderResponse> getAll(int page, int count);
 }

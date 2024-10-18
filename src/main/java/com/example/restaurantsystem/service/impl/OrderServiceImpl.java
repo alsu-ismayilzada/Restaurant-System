@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.service.impl;
 
-import com.example.restaurantsystem.dto.OrderDto;
+import com.example.restaurantsystem.dto.response.OrderResponse;
+import com.example.restaurantsystem.dto.request.OrderRequest;
 import com.example.restaurantsystem.entity.Order;
 import com.example.restaurantsystem.mapper.OrderMapper;
 import com.example.restaurantsystem.repository.OrderRepository;
@@ -18,7 +19,7 @@ public class OrderServiceImpl implements com.example.restaurantsystem.service.Or
     private final OrderMapper orderMapper;
 
     @Override
-    public void addOrder(OrderDto order) {
+    public void addOrder(OrderRequest order) {
         orderRepository.save(orderMapper.toOrderEntity(order));
     }
 
@@ -28,14 +29,14 @@ public class OrderServiceImpl implements com.example.restaurantsystem.service.Or
     }
 
     @Override
-    public OrderDto getById(Integer id) {
+    public OrderResponse getById(Integer id) {
         return orderRepository.findById(id)
                 .stream().map(orderMapper::toOrderDto)
                 .findFirst().get();
     }
 
     @Override
-    public List<OrderDto> getAll(int page,int count) {
+    public List<OrderResponse> getAll(int page, int count) {
         Page<Order> all = orderRepository.findAll(PageRequest.of(page,count));
 
         return all.getContent()

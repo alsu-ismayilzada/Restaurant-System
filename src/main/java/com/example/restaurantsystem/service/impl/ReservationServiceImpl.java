@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.service.impl;
 
-import com.example.restaurantsystem.dto.ReservationDto;
+import com.example.restaurantsystem.dto.response.ReservationResponse;
+import com.example.restaurantsystem.dto.request.ReservationRequest;
 import com.example.restaurantsystem.entity.Reservation;
 import com.example.restaurantsystem.mapper.ReservationMapper;
 import com.example.restaurantsystem.repository.ReservationRepository;
@@ -19,7 +20,7 @@ public class ReservationServiceImpl implements com.example.restaurantsystem.serv
     private final ReservationMapper reservationMapper;
 
     @Override
-    public void addReservation(ReservationDto reservation) {
+    public void addReservation(ReservationRequest reservation) {
         reservationRepository.save(reservationMapper.toReservationEntity(reservation));
     }
 
@@ -29,14 +30,14 @@ public class ReservationServiceImpl implements com.example.restaurantsystem.serv
     }
 
     @Override
-    public ReservationDto getById(Integer id) {
+    public ReservationResponse getById(Integer id) {
         return reservationRepository.findById(id)
                 .stream().map(reservationMapper::toReservationDto)
                 .findFirst().get();
     }
 
     @Override
-    public List<ReservationDto> getAll(int page,int count) {
+    public List<ReservationResponse> getAll(int page, int count) {
         Page<Reservation> all = reservationRepository.findAll(PageRequest.of(page,count));
 
         return all.getContent()

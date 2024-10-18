@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.groovy.mapper
 
-import com.example.restaurantsystem.dto.ItemDto
+
+import com.example.restaurantsystem.dto.response.ItemResponse
 import com.example.restaurantsystem.entity.Item
 import com.example.restaurantsystem.mapper.ItemMapper
 import com.example.restaurantsystem.mapper.ItemMapperImpl
@@ -29,7 +30,7 @@ class ItemMapperTest extends Specification {
 
     def "TestToItemEntity"(){
         given:
-         def itemDto = random.nextObject(ItemDto)
+         def itemDto = random.nextObject(ItemResponse)
 
         when:
          def item = itemMapper.toItemEntity(itemDto)

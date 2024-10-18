@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.service.impl;
 
-import com.example.restaurantsystem.dto.TableDto;
+import com.example.restaurantsystem.dto.response.TableResponse;
+import com.example.restaurantsystem.dto.request.TableRequest;
 import com.example.restaurantsystem.entity.Table;
 import com.example.restaurantsystem.mapper.TableMapper;
 import com.example.restaurantsystem.repository.TableRepository;
@@ -20,7 +21,7 @@ public class TableServiceImpl implements TableService {
     private final TableMapper tableMapper;
 
     @Override
-    public void addTable(TableDto table) {
+    public void addTable(TableRequest table) {
         tableRepository.save(tableMapper.toTableEntity(table));
     }
 
@@ -30,14 +31,14 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public TableDto getById(Integer id) {
+    public TableResponse getById(Integer id) {
         return tableRepository.findById(id)
                 .stream().map(tableMapper::toTableDto)
                 .findFirst().get();
     }
 
     @Override
-    public List<TableDto> getAll(int page,int count) {
+    public List<TableResponse> getAll(int page, int count) {
         Page<Table> all = tableRepository.findAll(PageRequest.of(page,count));
 
         return all.getContent()

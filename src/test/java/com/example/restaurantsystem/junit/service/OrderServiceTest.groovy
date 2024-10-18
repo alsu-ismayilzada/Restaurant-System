@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.junit.service
 
-import com.example.restaurantsystem.dto.OrderDto
+
+import com.example.restaurantsystem.dto.response.OrderResponse
 import com.example.restaurantsystem.entity.Order
 import com.example.restaurantsystem.mapper.OrderMapper
 import com.example.restaurantsystem.repository.OrderRepository
@@ -26,7 +27,7 @@ class OrderServiceTest extends  Specification{
         given:
          def id = random.nextObject(Integer)
          def entity = random.nextObject(Order)
-         def dto = random.nextObject(OrderDto)
+         def dto = random.nextObject(OrderResponse)
 
         when:
         def result = orderService.getById(id)
@@ -39,7 +40,7 @@ class OrderServiceTest extends  Specification{
 
     def "TestAddOrder success" () {
         given:
-        def orderDto = random.nextObject(OrderDto)
+        def orderDto = random.nextObject(OrderResponse)
         def orderEntity = random.nextObject(Order)
 
         and:

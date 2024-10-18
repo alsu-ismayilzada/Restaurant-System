@@ -1,5 +1,6 @@
 package com.example.restaurantsystem.controller;
-import com.example.restaurantsystem.dto.ReservationDto;
+import com.example.restaurantsystem.dto.response.ReservationResponse;
+import com.example.restaurantsystem.dto.request.ReservationRequest;
 import com.example.restaurantsystem.service.impl.ReservationServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ReservationController {
         this.reservationManager = reservationManager;
     }
     @PostMapping("")
-    public void addReservation(ReservationDto reservation){
+    public void addReservation(ReservationRequest reservation){
         reservationManager.addReservation(reservation);
     }
 
@@ -22,11 +23,11 @@ public class ReservationController {
         reservationManager.deleteById(id);
     }
     @GetMapping("{id}")
-    public ReservationDto getById(@PathVariable Integer id){
+    public ReservationResponse getById(@PathVariable Integer id){
         return reservationManager.getById(id);
     }
     @GetMapping()
-    public List<ReservationDto> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
+    public List<ReservationResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
         return reservationManager.getAll(page,count);
     }
 

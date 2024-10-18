@@ -1,14 +1,14 @@
 package com.example.restaurantsystem.service;
 
-import com.example.restaurantsystem.dto.TableDto;
-import com.example.restaurantsystem.entity.Table;
+import com.example.restaurantsystem.dto.response.TableResponse;
+import com.example.restaurantsystem.dto.request.TableRequest;
 
 import java.util.List;
 
 public interface TableService {
 
-    void addTable(TableDto table);
+    void addTable(TableRequest table);
     void deleteById(Integer id);
-    TableDto getById(Integer id);
-    List<TableDto> getAll(int page , int count);
+    TableResponse getById(Integer id);
+    List<TableResponse> getAll(int page , int count);
 }

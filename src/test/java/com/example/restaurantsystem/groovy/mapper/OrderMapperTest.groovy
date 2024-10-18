@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.groovy.mapper
 
-import com.example.restaurantsystem.dto.OrderDto
+
+import com.example.restaurantsystem.dto.response.OrderResponse
 import com.example.restaurantsystem.entity.Order
 import com.example.restaurantsystem.mapper.OrderMapper
 import com.example.restaurantsystem.mapper.OrderMapperImpl
@@ -30,7 +31,7 @@ class OrderMapperTest extends Specification{
 
     def "TestToOrderEntity"(){
         given:
-         def orderDto = random.nextObject(OrderDto)
+         def orderDto = random.nextObject(OrderResponse)
 
         when:
          def order = orderMapper.toOrderEntity(orderDto)

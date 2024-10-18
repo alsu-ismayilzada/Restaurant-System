@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.controller;
 
-import com.example.restaurantsystem.dto.UserDto;
+import com.example.restaurantsystem.dto.response.UserResponse;
+import com.example.restaurantsystem.dto.request.UserRequest;
 import com.example.restaurantsystem.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UserController {
         this.userManager = userManager;
     }
     @PostMapping()
-    public void addUser(@RequestBody UserDto user){
+    public void addUser(@RequestBody UserRequest user){
         userManager.addUser(user);
         log.info("add process executed");
     }
@@ -27,11 +28,11 @@ public class UserController {
         log.info("delete process executed");
     }
     @GetMapping("{id}")
-    public UserDto getById(@PathVariable Integer id){
+    public UserResponse getById(@PathVariable Integer id){
        return userManager.getById(id);
     }
     @GetMapping
-    public List<UserDto> getAll(@RequestParam(value = "page") int page,@RequestParam(value = "count") int count){
+    public List<UserResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
         return userManager.getAll(page,count);
     }
 }

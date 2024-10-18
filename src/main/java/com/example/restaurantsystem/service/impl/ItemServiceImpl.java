@@ -1,5 +1,6 @@
 package com.example.restaurantsystem.service.impl;
-import com.example.restaurantsystem.dto.ItemDto;
+import com.example.restaurantsystem.dto.response.ItemResponse;
+import com.example.restaurantsystem.dto.request.ItemRequest;
 import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.mapper.ItemMapper;
 import com.example.restaurantsystem.repository.ItemRepository;
@@ -16,7 +17,7 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
     private final ItemMapper itemMapper;
 
     @Override
-    public void addItem(ItemDto item) {
+    public void addItem(ItemRequest item) {
         itemRepository.save(itemMapper.toItemEntity(item));
     }
 
@@ -25,13 +26,13 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
         itemRepository.deleteById(id);
     }
     @Override
-    public ItemDto getById(Integer id) {
+    public ItemResponse getById(Integer id) {
         return itemRepository.findById(id)
                 .stream().map(itemMapper::toItemDto)
                 .findFirst().get();
     }
     @Override
-    public List<ItemDto> getAll(int page,int count) {
+    public List<ItemResponse> getAll(int page, int count) {
         Page<Item> all = itemRepository.findAll(PageRequest.of(page,count));
         return all.getContent()
                 .stream().map(itemMapper::toItemDto)

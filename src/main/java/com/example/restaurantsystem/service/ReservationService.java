@@ -1,13 +1,14 @@
 package com.example.restaurantsystem.service;
 
-import com.example.restaurantsystem.dto.ReservationDto;
+import com.example.restaurantsystem.dto.response.ReservationResponse;
+import com.example.restaurantsystem.dto.request.ReservationRequest;
 
 import java.util.List;
 
 public interface ReservationService {
 
-    void addReservation(ReservationDto reservation);
+    void addReservation(ReservationRequest reservation);
     void deleteById(Integer id);
-    ReservationDto getById(Integer id);
-    List<ReservationDto> getAll(int page, int count);
+    ReservationResponse getById(Integer id);
+    List<ReservationResponse> getAll(int page, int count);
 }
