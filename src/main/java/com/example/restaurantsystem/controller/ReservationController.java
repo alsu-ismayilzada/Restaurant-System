@@ -14,8 +14,8 @@ public class ReservationController {
     private final ReservationServiceImpl reservationService;
 
     @PostMapping("")
-    public void addReservation(ReservationRequest reservation){
-        reservationService.addReservation(reservation);
+    public ReservationResponse addReservation(ReservationRequest reservation){
+        return reservationService.addReservation(reservation);
     }
 
     @DeleteMapping("{id}")
@@ -34,7 +34,7 @@ public class ReservationController {
     }
 
     @PutMapping("/{reservationId}")
-    public ReservationResponse updateReservation(ReservationRequest reservation, @PathVariable Integer reservationId){
+    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservation, @PathVariable Integer reservationId){
         return reservationService.updateById(reservationId, reservation);
     }
 

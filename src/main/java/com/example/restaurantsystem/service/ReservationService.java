@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReservationService {
 
-    void addReservation(ReservationRequest reservation);
+    ReservationResponse addReservation(ReservationRequest reservation);
     void deleteById(Integer id);
     ReservationResponse getById(Integer id);
     List<ReservationResponse> getAll(int page, int count);

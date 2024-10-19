@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
+@jakarta.persistence.Table(name = "reservations")
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Reservation {

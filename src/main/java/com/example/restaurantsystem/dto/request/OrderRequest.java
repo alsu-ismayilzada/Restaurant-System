@@ -5,10 +5,11 @@ import com.example.restaurantsystem.entity.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class OrderRequest {
-    Item item;
+    List<Item> item;
     User user;
     LocalDateTime date;
     Double bill;

@@ -18,9 +18,8 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping()
-    public void addUser(@RequestBody UserRequest user){
-        userService.addUser(user);
-        log.info("add process executed");
+    public UserResponse addUser(@RequestBody UserRequest user){
+        return userService.saveUser(user);
     }
 
     @DeleteMapping("{id}")
@@ -31,12 +30,12 @@ public class UserController {
 
     @GetMapping("{id}")
     public UserResponse getById(@PathVariable Integer id){
-       return userService.getById(id);
+       return userService.findUserResponseById(id);
     }
 
     @GetMapping
     public List<UserResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
-        return userService.getAll(page,count);
+        return userService.findAll(page,count);
     }
 
     @PutMapping("/update/{userId}")

@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.dto.response;
 
-import com.example.restaurantsystem.repository.ItemType;
+import com.example.restaurantsystem.enums.ItemType;
 import lombok.Data;
 
 @Data

@@ -1,8 +1,8 @@
-package com.example.restaurantsystem.repository;
+package com.example.restaurantsystem.enums;
 
 public enum TableStatus {
 
-    EMPTY("Empty"), FULL("Full");
+    EMPTY("Empty"), BOOKED("Booked");
 
     String statusText;
 

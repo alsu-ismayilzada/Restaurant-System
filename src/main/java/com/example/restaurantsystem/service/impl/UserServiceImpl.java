@@ -23,8 +23,9 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
-    public void addUser(UserRequest user) {
-        userRepository.save(userMapper.toUserEntity(user));
+    public UserResponse saveUser(UserRequest user) {
+        var userEntity = userRepository.save(userMapper.toUserEntity(user));
+        return userMapper.toUserDto(userEntity);
     }
 
     @Override
@@ -33,12 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse getById(Integer id) {
+    public UserResponse findUserResponseById(Integer id) {
         return userMapper.toUserDto(findById(id));
     }
 
     @Override
-    public List<UserResponse> getAll(int page, int count) {
+    public List<UserResponse> findAll(int page, int count) {
         Page<User> all = userRepository.findAll(PageRequest.of(page,count));
         return all.getContent()
                 .stream().map(userMapper::toUserDto)

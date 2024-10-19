@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ReservationResponse{
+
     User user;
     LocalDateTime date;
     Table table;

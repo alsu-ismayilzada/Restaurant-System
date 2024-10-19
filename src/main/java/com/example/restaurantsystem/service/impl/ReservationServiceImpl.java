@@ -5,6 +5,8 @@ import com.example.restaurantsystem.dto.request.ReservationRequest;
 import com.example.restaurantsystem.entity.Reservation;
 import com.example.restaurantsystem.mapper.ReservationMapper;
 import com.example.restaurantsystem.repository.ReservationRepository;
+import com.example.restaurantsystem.service.ReservationService;
+import com.example.restaurantsystem.service.TableService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,14 +18,20 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class ReservationServiceImpl implements com.example.restaurantsystem.service.ReservationService {
+public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
+    private final TableService tableService;
 
     @Override
-    public void addReservation(ReservationRequest reservation) {
-        reservationRepository.save(reservationMapper.toReservationEntity(reservation));
+    public ReservationResponse addReservation(ReservationRequest request) {
+        var reservation = reservationMapper.toReservationEntity(request);
+        var table = tableService.findById(request.getTable());
+        tableService.bookTableById(table.getId());
+        reservation.setTable(table);
+        reservationRepository.save(reservation);
+        return reservationMapper.toReservationDto(reservation);
     }
 
     @Override
@@ -49,6 +57,11 @@ public class ReservationServiceImpl implements com.example.restaurantsystem.serv
     public ReservationResponse updateById(Integer id, ReservationRequest request) {
         var reservation = findById(id);
         reservationMapper.updateReservation(reservation, request);
+        if(request.getTable() != null) {
+            var table = tableService.findById(request.getTable());
+            tableService.bookTableById(table.getId());
+            reservation.setTable(table);
+        }
         return reservationMapper.toReservationDto(reservation);
     }
 

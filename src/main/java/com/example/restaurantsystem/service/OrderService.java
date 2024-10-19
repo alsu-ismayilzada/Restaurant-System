@@ -8,8 +8,8 @@ import java.util.List;
 public interface OrderService {
 
     void addOrder(OrderRequest order);
-    void deleteById(Integer id);
-    OrderResponse getById(Integer id);
+    void deleteById(Long id);
+    OrderResponse getById(Long id);
     List<OrderResponse> getAll(int page, int count);
-    OrderResponse updateById(Integer id, OrderRequest order);
+    OrderResponse updateById(Long id, OrderRequest order);
 }

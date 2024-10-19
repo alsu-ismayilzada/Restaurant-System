@@ -1,6 +1,7 @@
-package com.example.restaurantsystem.repository;
+package com.example.restaurantsystem.enums;
 
 public enum ItemType {
+
     BREAKFAST("Breakfast"),
     MEAL("Meal"),
     BEVERAGE("Beverage"),

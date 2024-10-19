@@ -3,6 +3,7 @@ package com.example.restaurantsystem.service.impl;
 import com.example.restaurantsystem.dto.response.TableResponse;
 import com.example.restaurantsystem.dto.request.TableRequest;
 import com.example.restaurantsystem.entity.Table;
+import com.example.restaurantsystem.enums.TableStatus;
 import com.example.restaurantsystem.mapper.TableMapper;
 import com.example.restaurantsystem.repository.TableRepository;
 import com.example.restaurantsystem.service.TableService;
@@ -23,22 +24,25 @@ public class TableServiceImpl implements TableService {
     private final TableMapper tableMapper;
 
     @Override
-    public void addTable(TableRequest table) {
-        tableRepository.save(tableMapper.toTableEntity(table));
+    public TableResponse saveTable(TableRequest table) {
+       var tableEntity = tableMapper.toTableEntity(table);
+       tableEntity.setStatus(TableStatus.EMPTY);
+       tableRepository.save(tableEntity);
+       return tableMapper.toTableDto(tableEntity);
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         tableRepository.deleteById(id);
     }
 
     @Override
-    public TableResponse getById(Integer id) {
+    public TableResponse findTableResponseById(Long id) {
         return tableMapper.toTableDto(findById(id));
     }
 
     @Override
-    public List<TableResponse> getAll(int page, int count) {
+    public List<TableResponse> findAll(int page, int count) {
         Page<Table> all = tableRepository.findAll(PageRequest.of(page,count));
 
         return all.getContent()
@@ -47,16 +51,37 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public TableResponse updateById(Integer id, TableRequest request) {
+    public TableResponse updateById(Long id, TableRequest request) {
         var table = findById(id);
         tableMapper.updateTable(table, request);
         return tableMapper.toTableDto(table);
     }
 
-    public Table findById(Integer id) {
+    @Override
+    public TableResponse bookTableById(Long id){
+       var table = findById(id);
+       if(table.getStatus() != TableStatus.EMPTY){
+           throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Table is already booked");
+       }
+       table.setStatus(TableStatus.BOOKED);
+       tableRepository.save(table);
+       return tableMapper.toTableDto(table);
+    }
+
+    @Override
+    public TableResponse unBookTableById(Long id){
+        var table = findById(id);
+        if(table.getStatus() != TableStatus.BOOKED){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Table is already empty");
+        }
+        table.setStatus(TableStatus.EMPTY);
+        tableRepository.save(table);
+        return tableMapper.toTableDto(table);
+    }
+
+    @Override
+    public Table findById(Long id) {
         return tableRepository.findById(id)
-                .orElseThrow(() ->{
-                    return new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Not Found");
-                });
+                .orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Not Found"));
     }
 }
