@@ -1,6 +1,6 @@
 package com.example.restaurantsystem.service.impl;
 
-import com.example.restaurantsystem.config.StateMachineServiceImplForOrder;
+import com.example.restaurantsystem.config.StateMachineServiceImpl;
 import com.example.restaurantsystem.dto.response.OrderResponse;
 import com.example.restaurantsystem.dto.request.OrderRequest;
 import com.example.restaurantsystem.entity.Order;
@@ -20,9 +20,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private StateMachineServiceImplForOrder stateMachineService;
+    private final StateMachineServiceImpl stateMachineService;
 
     @Override
     public void addOrder(OrderRequest order) {

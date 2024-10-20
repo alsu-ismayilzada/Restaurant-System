@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class StateMachineServiceImplForOrder {
+public class StateMachineServiceImpl {
 
     private final StateMachineFactory<OrderState, OrderEvent> stateMachineFactory;
     private final StateMachineRuntimePersister<OrderState, OrderEvent, String> stateMachineRuntimePersister;

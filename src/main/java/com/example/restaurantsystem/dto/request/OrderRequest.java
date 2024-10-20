@@ -9,8 +9,8 @@ import java.util.List;
 
 @Data
 public class OrderRequest {
-    List<Item> item;
-    User user;
+    List<Long> item;
+    Long user;
     LocalDateTime date;
     Double bill;
 }

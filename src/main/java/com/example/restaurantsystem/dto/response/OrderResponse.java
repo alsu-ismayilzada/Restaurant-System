@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class OrderResponse {
-        List<Item> item;
+        List<ItemResponse> item;
         User user;
         LocalDateTime date;
         Double bill;
