@@ -18,14 +18,10 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    Long id;
     String name;
     String photo;
     Double price;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    Order order;
 
     @Enumerated(EnumType.STRING)
     ItemType itemType;

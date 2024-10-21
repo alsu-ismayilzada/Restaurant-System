@@ -1,6 +1,7 @@
 package com.example.restaurantsystem.entity;
 
 import com.example.restaurantsystem.enums.OrderState;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -11,6 +12,8 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static jakarta.persistence.FetchType.EAGER;
 
 @Entity
 @Data
@@ -24,7 +27,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToMany(mappedBy = "order")
+    @ManyToMany(fetch = EAGER)
+    @JoinTable(name = "order_items",
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"order_id", "item_id"})})
     List<Item> item;
 
     @ManyToOne
@@ -32,5 +39,8 @@ public class Order {
     User user;
     LocalDateTime date;
     Double bill;
-    OrderState status;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private List<OrderStatusForOrder> orderStatusForOrders;
 }

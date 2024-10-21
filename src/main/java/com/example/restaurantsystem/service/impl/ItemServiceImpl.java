@@ -25,11 +25,11 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         itemRepository.deleteById(id);
     }
     @Override
-    public ItemResponse getById(Integer id) {
+    public ItemResponse getById(Long id) {
         return itemMapper.toItemDto(findById(id));
     }
     @Override
@@ -41,13 +41,13 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
     }
 
     @Override
-    public ItemResponse updateById(Integer id, ItemRequest request) {
+    public ItemResponse updateById(Long id, ItemRequest request) {
         var item = findById(id);
         itemMapper.updateItem(item, request);
         return itemMapper.toItemDto(item);
     }
 
-    public Item findById(Integer id){
+    public Item findById(Long id){
         return itemRepository.findById(id).
                 orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item Not Found"));
     }

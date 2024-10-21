@@ -12,6 +12,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = {ItemService.class, UserService.class, ItemMapper.class})
 public interface OrderMapper {
 
+    @Mapping(target = "status", source = "orderStatusForOrders")
     OrderResponse toOrderDto(Order order);
     Order toOrderEntity(OrderRequest order);
     void updateOrder(@MappingTarget Order order, OrderRequest request);

@@ -9,10 +9,10 @@ import java.util.List;
 public interface ItemService {
 
     void addItem(ItemRequest item);
-    void deleteById(Integer id);
-    ItemResponse getById(Integer id);
+    void deleteById(Long id);
+    ItemResponse getById(Long id);
     List<ItemResponse> getAll(int page, int count);
-    ItemResponse updateById(Integer id, ItemRequest item);
-    Item findById(Integer id);
+    ItemResponse updateById(Long id, ItemRequest item);
+    Item findById(Long id);
 
 }
