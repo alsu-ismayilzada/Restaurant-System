@@ -19,7 +19,7 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id",referencedColumnName = "id")

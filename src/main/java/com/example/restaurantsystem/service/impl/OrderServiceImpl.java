@@ -28,7 +28,6 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final StatemachineEngine stateMachineService;
-    private final ItemService itemService;
 
     @Override
     public void addOrder(OrderRequest request) {

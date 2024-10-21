@@ -35,12 +35,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         reservationRepository.deleteById(id);
     }
 
     @Override
-    public ReservationResponse getById(Integer id) {
+    public ReservationResponse getById(Long id) {
         return reservationMapper.toReservationDto(findById(id));
     }
 
@@ -54,7 +54,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ReservationResponse updateById(Integer id, ReservationRequest request) {
+    public ReservationResponse updateById(Long id, ReservationRequest request) {
         var reservation = findById(id);
         reservationMapper.updateReservation(reservation, request);
         if(request.getTable() != null) {
@@ -65,7 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationMapper.toReservationDto(reservation);
     }
 
-    public Reservation findById(Integer id) {
+    public Reservation findById(Long id) {
         return reservationRepository.findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Reservation not found"));
     }

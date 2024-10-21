@@ -23,13 +23,13 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(@PathVariable Long id){
         userService.deleteById(id);
         log.info("delete process executed");
     }
 
     @GetMapping("{id}")
-    public UserResponse getById(@PathVariable Integer id){
+    public UserResponse getById(@PathVariable Long id){
        return userService.findUserResponseById(id);
     }
 
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{userId}")
-    public UserResponse update(@PathVariable Integer userId, @RequestBody UserRequest user){
+    public UserResponse update(@PathVariable Long userId, @RequestBody UserRequest user){
         return userService.updateUserById(userId, user);
     }
 }

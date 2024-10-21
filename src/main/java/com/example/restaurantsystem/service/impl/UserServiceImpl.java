@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public UserResponse findUserResponseById(Integer id) {
+    public UserResponse findUserResponseById(Long id) {
         return userMapper.toUserDto(findById(id));
     }
 
@@ -47,13 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateUserById(Integer id, UserRequest request) {
+    public UserResponse updateUserById(Long id, UserRequest request) {
         var user = findById(id);
         userMapper.updateUser(user,request);
         return userMapper.toUserDto(user);
     }
 
-    public User findById(Integer id){
+    public User findById(Long id){
         return userRepository.findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User Not Found"));
     }

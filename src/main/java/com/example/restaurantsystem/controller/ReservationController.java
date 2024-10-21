@@ -13,18 +13,18 @@ public class ReservationController {
 
     private final ReservationServiceImpl reservationService;
 
-    @PostMapping("")
+    @PostMapping()
     public ReservationResponse addReservation(ReservationRequest reservation){
         return reservationService.addReservation(reservation);
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(@PathVariable Long id){
         reservationService.deleteById(id);
     }
 
     @GetMapping("{id}")
-    public ReservationResponse getById(@PathVariable Integer id){
+    public ReservationResponse getById(@PathVariable Long id){
         return reservationService.getById(id);
     }
 
@@ -34,7 +34,7 @@ public class ReservationController {
     }
 
     @PutMapping("/{reservationId}")
-    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservation, @PathVariable Integer reservationId){
+    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservation, @PathVariable Long reservationId){
         return reservationService.updateById(reservationId, reservation);
     }
 

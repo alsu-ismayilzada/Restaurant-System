@@ -10,9 +10,9 @@ public interface UserService {
 
 
     UserResponse saveUser(UserRequest user);
-    void deleteById(Integer id);
-    UserResponse findUserResponseById(Integer id);
+    void deleteById(Long id);
+    UserResponse findUserResponseById(Long id);
     List<UserResponse> findAll(int page, int count);
-    UserResponse updateUserById(Integer id, UserRequest user);
-    User findById(Integer id);
+    UserResponse updateUserById(Long id, UserRequest user);
+    User findById(Long id);
 }
