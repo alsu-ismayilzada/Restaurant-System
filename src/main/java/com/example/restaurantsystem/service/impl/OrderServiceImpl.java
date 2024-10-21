@@ -3,12 +3,14 @@ package com.example.restaurantsystem.service.impl;
 import com.example.restaurantsystem.config.StatemachineEngine;
 import com.example.restaurantsystem.dto.response.OrderResponse;
 import com.example.restaurantsystem.dto.request.OrderRequest;
+import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.entity.Order;
 import com.example.restaurantsystem.entity.OrderStatusForOrder;
 import com.example.restaurantsystem.enums.OrderEvent;
 import com.example.restaurantsystem.enums.OrderState;
 import com.example.restaurantsystem.mapper.OrderMapper;
 import com.example.restaurantsystem.repository.OrderRepository;
+import com.example.restaurantsystem.service.ItemInfoService;
 import com.example.restaurantsystem.service.ItemService;
 import com.example.restaurantsystem.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Comparator;
@@ -28,12 +31,33 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final StatemachineEngine stateMachineService;
+    private final ItemService itemService;
+    private final ItemInfoService itemInfoService;
 
+    @Transactional
     @Override
-    public void addOrder(OrderRequest request) {
+    public OrderResponse addOrder(OrderRequest request) {
         var order = orderMapper.toOrderEntity(request);
+        var itemInfos = order.getItemInfos();
+
+        itemInfos.forEach(itemInfo -> {
+            itemInfo.setItem(itemService.findById(itemInfo.getItem().getId()));
+            itemInfo.setOrder(order);// Ensure item is fetched
+            itemInfoService.saveItemInfo(itemInfo); // Save each ItemInfo
+        });
+
+        Double totalBill = itemInfos.stream()
+                .mapToDouble(itemInfo -> {
+                    Item item = itemInfo.getItem();
+                    return (item.getPrice() != null ? item.getPrice() : 0.0) * itemInfo.getCount();
+                })
+                .sum();
+
+        order.setBill(totalBill);
         var orderEntity = orderRepository.save(order);
         stateMachineService.sendMessage(orderEntity.getId(), OrderEvent.CREATE);
+
+        return orderMapper.toOrderDto(orderEntity);
     }
 
     @Override

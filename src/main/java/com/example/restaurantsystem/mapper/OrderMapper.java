@@ -14,6 +14,9 @@ public interface OrderMapper {
 
     @Mapping(target = "status", source = "orderStatusForOrders")
     OrderResponse toOrderDto(Order order);
+
+    @Mapping(target = "bill", ignore = true)
     Order toOrderEntity(OrderRequest order);
+
     void updateOrder(@MappingTarget Order order, OrderRequest request);
 }

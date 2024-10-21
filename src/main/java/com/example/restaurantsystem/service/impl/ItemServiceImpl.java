@@ -51,4 +51,9 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
         return itemRepository.findById(id).
                 orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item Not Found"));
     }
+
+    @Override
+    public List<Item> findAllById(List<Long> ids) {
+        return itemRepository.findAllById(ids);
+    }
 }

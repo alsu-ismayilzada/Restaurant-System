@@ -14,5 +14,6 @@ public interface ItemService {
     List<ItemResponse> getAll(int page, int count);
     ItemResponse updateById(Long id, ItemRequest item);
     Item findById(Long id);
+    List<Item> findAllById(List<Long> ids);
 
 }

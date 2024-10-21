@@ -18,8 +18,8 @@ public class OrderController {
     private final OrderServiceImpl orderService;
 
     @PostMapping()
-    public void addOrder(@RequestBody OrderRequest order){
-        orderService.addOrder(order);
+    public OrderResponse addOrder(@RequestBody OrderRequest order){
+        return orderService.addOrder(order);
     }
 
     @DeleteMapping("{id}")
