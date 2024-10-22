@@ -4,9 +4,11 @@ import com.example.restaurantsystem.dto.request.ItemRequest;
 import com.example.restaurantsystem.entity.Item;
 import com.example.restaurantsystem.mapper.ItemMapper;
 import com.example.restaurantsystem.repository.ItemRepository;
+import com.example.restaurantsystem.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ItemServiceImpl implements com.example.restaurantsystem.service.ItemService {
+public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 
@@ -28,16 +30,16 @@ public class ItemServiceImpl implements com.example.restaurantsystem.service.Ite
     public void deleteById(Long id) {
         itemRepository.deleteById(id);
     }
+
     @Override
     public ItemResponse getById(Long id) {
         return itemMapper.toItemDto(findById(id));
     }
+
     @Override
-    public List<ItemResponse> getAll(int page, int count) {
-        Page<Item> all = itemRepository.findAll(PageRequest.of(page,count));
-        return all.getContent()
-                .stream().map(itemMapper::toItemDto)
-                .toList();
+    public Page<ItemResponse> getAll(Pageable pageable) {
+        return itemRepository.findAll(pageable)
+                .map(itemMapper::toItemDto);
     }
 
     @Override

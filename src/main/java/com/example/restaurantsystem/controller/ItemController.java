@@ -4,6 +4,8 @@ import com.example.restaurantsystem.dto.response.ItemResponse;
 import com.example.restaurantsystem.dto.request.ItemRequest;
 import com.example.restaurantsystem.service.impl.ItemServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +33,8 @@ public class ItemController {
     }
 
     @GetMapping
-    public List<ItemResponse> getAll(@RequestParam(value = "page") int page, @RequestParam(value = "count") int count){
-        return itemService.getAll(page,count);
+    public Page<ItemResponse> getAll(Pageable pageable){
+        return itemService.getAll(pageable);
     }
 
     @PutMapping("/{itemId}")
