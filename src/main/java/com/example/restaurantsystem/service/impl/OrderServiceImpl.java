@@ -42,8 +42,8 @@ public class OrderServiceImpl implements OrderService {
 
         itemInfos.forEach(itemInfo -> {
             itemInfo.setItem(itemService.findById(itemInfo.getItem().getId()));
-            itemInfo.setOrder(order);// Ensure item is fetched
-            itemInfoService.saveItemInfo(itemInfo); // Save each ItemInfo
+            itemInfo.setOrder(order);
+            itemInfoService.saveItemInfo(itemInfo);
         });
 
         Double totalBill = itemInfos.stream()

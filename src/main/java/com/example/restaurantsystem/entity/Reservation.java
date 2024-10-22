@@ -20,14 +20,14 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    @ManyToOne
-    @JoinColumn(name="user_id",referencedColumnName = "id")
-    User user;
+    Double price;
     LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name="table_id",referencedColumnName = "id")
     Table table;
-    Double price;
+
+    @ManyToOne
+    @JoinColumn(name="user_id",referencedColumnName = "id")
+    User user;
 }
