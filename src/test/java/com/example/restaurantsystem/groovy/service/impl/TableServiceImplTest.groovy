@@ -1,9 +1,7 @@
 package com.example.restaurantsystem.groovy.service.impl
 
 import com.example.restaurantsystem.dto.request.TableRequest
-import com.example.restaurantsystem.dto.response.ItemResponse
 import com.example.restaurantsystem.dto.response.TableResponse
-import com.example.restaurantsystem.entity.Item
 import com.example.restaurantsystem.entity.Table
 import com.example.restaurantsystem.enums.TableStatus
 import com.example.restaurantsystem.mapper.TableMapper
@@ -118,19 +116,131 @@ class TableServiceImplTest extends Specification {
 
     }
 
-    def "BookTableById"() {
+    def "BookTableById success"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        table.setStatus(TableStatus.EMPTY)
+        tableRepository.findById(id) >> Optional.of(table)
+
+        when:
+        tableService.bookTableById(id)
+        table.setStatus(TableStatus.BOOKED)
+
+        then:
+        1* tableRepository.save(table)
+        1* tableMapper.toTableDto(table)
+    }
+
+    def "BookTableById Already Booked"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        table.setStatus(TableStatus.BOOKED)
+        tableRepository.findById(id) >> Optional.of(table)
+
+        when:
+        tableService.bookTableById(id)
+
+        then:
+        0* tableRepository.save(table)
+        0* tableMapper.toTableDto(table)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Table is already booked"
+    }
+
+    def "BookTableById Not Found"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        tableRepository.findById(id) >> Optional.empty()
+
+        when:
+        tableService.bookTableById(id)
+
+        then:
+        0* tableRepository.save(table)
+        0* tableMapper.toTableDto(table)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Data Not Found"
+    }
+
+    def "UnBookTableById Success"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        table.setStatus(TableStatus.BOOKED)
+        tableRepository.findById(id) >> Optional.of(table)
+
+        when:
+        tableService.unBookTableById(id)
+        table.setStatus(TableStatus.EMPTY)
+
+        then:
+        1* tableRepository.save(table)
+        1* tableMapper.toTableDto(table)
+    }
+
+    def "UnBookTableById Success Already Empty"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        table.setStatus(TableStatus.EMPTY)
+        tableRepository.findById(id) >> Optional.of(table)
+
+        when:
+        tableService.unBookTableById(id)
+
+        then:
+        0* tableRepository.save(table)
+        0* tableMapper.toTableDto(table)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Table is already empty"
+    }
+
+    def "UnBookTableById Success Not Found"() {
+        given:
+        def id = random.nextObject(Long)
+        def table = random.nextObject (Table)
+        tableRepository.findById(id) >> Optional.empty()
+
+        when:
+        tableService.unBookTableById(id)
+
+        then:
+        0* tableRepository.save(table)
+        0* tableMapper.toTableDto(table)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Data Not Found"
+    }
+
+    def "FindById success"() {
         given:
         def id = random.nextObject(Long)
         def table = random.nextObject(Table)
 
         when:
-        tableService.bookTableById(id)
+        tableService.findById(id)
 
+        then:
+        1* tableRepository.findById(id) >> Optional.of(table)
     }
 
-    def "UnBookTableById"() {
-    }
+    def "FindById Not Found"() {
+        given:
+        def id = random.nextObject(Long)
 
-    def "FindById"() {
+        when:
+        tableService.findById(id)
+
+        then:
+        1* tableRepository.findById(id) >> Optional.empty()
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Data Not Found"
     }
 }
