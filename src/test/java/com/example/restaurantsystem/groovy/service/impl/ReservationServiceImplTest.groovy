@@ -104,7 +104,7 @@ class ReservationServiceImplTest extends Specification {
         1* reservationRepository.deleteById(id)
     }
 
-    def "GetById"() {
+    def "GetById success"() {
         given:
         def id = random.nextObject(Long )
         def reservation = random.nextObject(Reservation)
@@ -123,6 +123,24 @@ class ReservationServiceImplTest extends Specification {
         result == response
     }
 
+    def "GetById Not Found"() {
+        given:
+        def id = random.nextObject(Long )
+        def reservation = random.nextObject(Reservation)
+
+        reservationRepository.findById(id) >> Optional.empty()
+
+        when:
+        def result = reservationService.getById(id)
+
+        then:
+        1* reservationRepository.findById(id) >> Optional.empty()
+        0* reservationMapper.toReservationDto(reservation)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Reservation not found"
+    }
+
     def "GetAll"() {
         given:
         Pageable pageable = Mock(Pageable)
@@ -139,7 +157,7 @@ class ReservationServiceImplTest extends Specification {
         1* reservationRepository.findAll(pageable) >> reservationPage
     }
 
-    def "UpdateById"() {
+    def "UpdateById success"() {
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(ReservationRequest)
@@ -167,7 +185,60 @@ class ReservationServiceImplTest extends Specification {
         result == response
     }
 
-    def "FindById"() {
+    def "UpdateById Not Found"() {
+        given:
+        def id = random.nextObject(Long)
+        def request = random.nextObject(ReservationRequest)
+        def reservation = random.nextObject(Reservation)
+        def table = random.nextObject(Table)
+        table.status = TableStatus.EMPTY
+
+        reservation.table = table
+
+        reservationRepository.findById(id) >> Optional.empty()
+
+        when:
+        reservationService.updateById(id, request)
+
+        then:
+        1* reservationRepository.findById(id) >> Optional.empty()
+        0* reservationMapper.updateReservation(reservation, request)
+        0* tableService.findById(request.table)
+        0* tableService.bookTableById(table.id)
+        0* reservationMapper.toReservationDto(reservation)
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Reservation not found"
+    }
+
+//    def "UpdateById Table Not Found"() {
+//        given:
+//        def id = random.nextObject(Long)
+//        def request = random.nextObject(ReservationRequest)
+//        def reservation = random.nextObject(Reservation)
+//        def response = random.nextObject(ReservationResponse)
+//        def table = random.nextObject(Table)
+//        table.status = TableStatus.EMPTY
+//
+//        reservation.table = table
+//
+//        reservationRepository.findById(id) >> Optional.of(reservation)
+//        tableService.findById(request.table) >> {new ResponseStatusException(HttpStatus.NOT_FOUND,"Data Not Found")}
+//
+//        when:
+//        reservationService.updateById(id, request)
+//
+//        then:
+//        1* reservationRepository.findById(id)
+//        1* reservationMapper.updateReservation(reservation, request)
+//        0* tableService.bookTableById(table.id)
+//        0* reservationMapper.toReservationDto(reservation) >> response
+//
+//        ResponseStatusException ex = thrown()
+//        ex.reason == "Data Not Found"
+//    }
+
+    def "FindById success"() {
         given:
         def id = random.nextObject(Long)
         def reservation = random.nextObject(Reservation)
@@ -179,5 +250,20 @@ class ReservationServiceImplTest extends Specification {
         1* reservationRepository.findById(id) >> Optional.of(reservation)
         result != null
         result == reservation
+    }
+
+    def "FindById Not Found"() {
+        given:
+        def id = random.nextObject(Long)
+
+        when:
+        reservationService.findById(id)
+
+        then:
+        1* reservationRepository.findById(id) >> Optional.empty()
+
+        ResponseStatusException ex = thrown()
+        ex.reason == "Reservation not found"
+
     }
 }
