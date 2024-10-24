@@ -10,8 +10,10 @@ import com.example.restaurantsystem.service.TableService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
     private final TableService tableService;
+
 
     @Override
     public ReservationResponse addReservation(ReservationRequest request) {
@@ -45,8 +48,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<ReservationResponse> getAll(int page, int count) {
-        Page<Reservation> all = reservationRepository.findAll(PageRequest.of(page,count));
+    public List<ReservationResponse> getAll(Pageable pageable) {
+        Page<Reservation> all = reservationRepository.findAll(pageable);
 
         return all.getContent()
                 .stream().map(reservationMapper::toReservationDto)
@@ -65,6 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationMapper.toReservationDto(reservation);
     }
 
+    @Override
     public Reservation findById(Long id) {
         return reservationRepository.findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Reservation not found"));

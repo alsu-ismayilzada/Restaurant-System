@@ -1,10 +1,12 @@
-package com.example.restaurantsystem.junit.service
+package com.example.restaurantsystem.groovy.service.impl
 
-
+import com.example.restaurantsystem.config.StatemachineEngine
 import com.example.restaurantsystem.dto.response.OrderResponse
 import com.example.restaurantsystem.entity.Order
 import com.example.restaurantsystem.mapper.OrderMapper
 import com.example.restaurantsystem.repository.OrderRepository
+import com.example.restaurantsystem.service.ItemInfoService
+import com.example.restaurantsystem.service.ItemService
 import com.example.restaurantsystem.service.impl.OrderServiceImpl
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -16,11 +18,17 @@ class OrderServiceTest extends  Specification{
     private OrderRepository orderRepository
     private OrderMapper orderMapper
     private OrderServiceImpl orderService
+    private StatemachineEngine stateMachineService
+    private ItemService itemService
+    private ItemInfoService itemInfoService
 
     def setup() {
         orderRepository = Mock()
         orderMapper = Mock()
-        orderService = new OrderServiceImpl(orderRepository,orderMapper)
+        stateMachineService = Mock()
+        itemService = Mock()
+        itemInfoService = Mock()
+        orderService = new OrderServiceImpl(orderRepository,orderMapper,stateMachineService,itemService,itemInfoService)
     }
 
     def "TestGetById success" () {
@@ -35,6 +43,7 @@ class OrderServiceTest extends  Specification{
         then:
          1 * orderRepository.findById(id) >> Optional.of(entity)
          1 * orderMapper.toOrderDto(entity) >> dto
+         result != null
          result == dto
     }
 
