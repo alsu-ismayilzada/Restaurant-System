@@ -48,12 +48,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<ReservationResponse> getAll(Pageable pageable) {
-        Page<Reservation> all = reservationRepository.findAll(pageable);
-
-        return all.getContent()
-                .stream().map(reservationMapper::toReservationDto)
-                .toList();
+    public Page<ReservationResponse> getAll(Pageable pageable) {
+        return reservationRepository.findAll(pageable).map(reservationMapper::toReservationDto);
     }
 
     @Override

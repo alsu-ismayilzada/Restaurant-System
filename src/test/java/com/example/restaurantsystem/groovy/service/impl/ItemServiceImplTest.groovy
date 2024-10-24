@@ -88,7 +88,7 @@ class ItemServiceImplTest extends Specification {
         given:
         Pageable pageable = Mock(Pageable)
         List<Item> items = [random.nextObject(Item), random.nextObject(Item)]
-        List<ItemResponse> itemResponses = items.collect { EnhancedRandom.random(ItemResponse) }
+        List<ItemResponse> itemResponses = items.collect { random.nextObject(ItemResponse) }
         Page<Item> itemPage = Mock(Page)
 
         when:

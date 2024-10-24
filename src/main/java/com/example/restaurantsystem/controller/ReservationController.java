@@ -4,6 +4,7 @@ import com.example.restaurantsystem.dto.request.ReservationRequest;
 import com.example.restaurantsystem.service.ReservationService;
 import com.example.restaurantsystem.service.impl.ReservationServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ReservationController {
     }
 
     @GetMapping()
-    public List<ReservationResponse> getAll(Pageable pageable){
+    public Page<ReservationResponse> getAll(Pageable pageable){
         return reservationService.getAll(pageable);
     }
 
