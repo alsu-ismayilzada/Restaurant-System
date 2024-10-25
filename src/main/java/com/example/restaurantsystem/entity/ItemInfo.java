@@ -1,17 +1,14 @@
 package com.example.restaurantsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "item_info")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +21,6 @@ public class ItemInfo {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
-    @JsonBackReference
     Item item;
 
     Integer count;
